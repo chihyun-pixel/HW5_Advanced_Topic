@@ -1,0 +1,27 @@
+{
+  "nodes": [
+    {
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [200, 300],
+      "parameters": {
+        "path": "ai-summary",
+        "httpMethod": "POST"
+      }
+    },
+    {
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "position": [450, 300],
+      "parameters": {
+        "prompt": "Summarize the following text: {{$json[\"text\"]}}",
+        "model": "gpt-3.5-turbo"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "OpenAI", "type": "main", "index": 0 }]]
+    }
+  }
+}
